@@ -5,11 +5,12 @@ from nltk import data
 from nltk.tokenize import sent_tokenize
 
 SENTENCE_REGEX = re.compile(r"(?<=[.!?])\s+")
+MISSING_SPACE_AFTER_BOUNDARY_REGEX = re.compile(r"([.!?][\"')\]]?)([A-Z])")
 MIN_SENTENCE_LENGTH = 10
 
 
 def split_sentences(text: str) -> list[str]:
-    normalized_text = text.strip()
+    normalized_text = _normalize_for_splitting(text)
     if not normalized_text:
         return []
 
@@ -25,6 +26,14 @@ def _tokenize_sentences(text: str) -> list[str]:
             pass
 
     return [part for part in SENTENCE_REGEX.split(text) if part.strip()]
+
+
+def _normalize_for_splitting(text: str) -> str:
+    trimmed = text.strip()
+    if not trimmed:
+        return ""
+    # Handle missing whitespace after sentence boundaries, e.g. ').It' -> '). It'
+    return MISSING_SPACE_AFTER_BOUNDARY_REGEX.sub(r"\1 \2", trimmed)
 
 
 @lru_cache(maxsize=1)
