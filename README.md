@@ -33,6 +33,8 @@ pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 ```
 
+Copy `.env.example` to `.env` if you want to override the default threshold, embedding model, or allowed CORS origin.
+
 ### Frontend
 
 ```bash
