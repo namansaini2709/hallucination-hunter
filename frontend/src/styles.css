@@ -185,31 +185,30 @@ body::after {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.8rem 1.2rem 2.8rem;
+  padding: 1.5rem 1.5rem 3rem;
 }
 
 .single-hero-copy {
   display: flex;
   justify-content: center;
-  padding-top: 0.3rem;
 }
 
 .single-hero-kicker {
   margin: 0;
-  color: rgba(207, 155, 55, 0.9);
-  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.38em;
+  letter-spacing: 0.45em;
   text-transform: uppercase;
 }
 
 .single-hero-art {
   position: relative;
   flex: 1;
-  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .single-hero-fill,
@@ -217,29 +216,29 @@ body::after {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -52%);
-  width: min(100%, 94rem);
+  transform: translate(-50%, -50%);
+  width: 100%;
   margin: 0;
   text-align: center;
   text-transform: uppercase;
-  line-height: 0.84;
-  letter-spacing: -0.08em;
+  line-height: 0.82;
+  letter-spacing: -0.06em;
   font-family: "Poppins", sans-serif;
 }
 
 .single-hero-fill {
   z-index: 1;
-  color: rgba(255, 247, 242, 0.9);
+  color: #ffffff;
   font-weight: 900;
-  font-size: clamp(4rem, 12vw, 10rem);
+  font-size: clamp(3rem, 12vw, 11rem);
 }
 
 .single-hero-outline {
-  z-index: 4;
+  z-index: 5;
   color: transparent;
-  font-weight: 800;
-  font-size: clamp(4rem, 12vw, 10rem);
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.86);
+  font-weight: 900;
+  font-size: clamp(3rem, 12vw, 11rem);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.95);
   pointer-events: none;
 }
 
@@ -250,12 +249,12 @@ body::after {
 
 .single-hero-bottom {
   position: relative;
-  z-index: 6;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.8rem;
-  padding-bottom: 0.8rem;
+  gap: 2.2rem;
+  padding-bottom: 0.5rem;
 }
 
 .single-hero-subcopy {
@@ -282,14 +281,7 @@ body::after {
 }
 
 .single-hero-shadow-band {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 56%;
-  width: 12%;
-  background: rgba(47, 17, 7, 0.55);
-  transform: skewX(0deg);
-  filter: blur(0.2px);
+  display: none;
 }
 
 .hero-spotlight {
@@ -412,10 +404,12 @@ body::after {
 .hero-cube-shell {
   position: relative;
   z-index: 3;
-  width: min(76vw, 31rem);
-  height: min(76vw, 31rem);
+  width: clamp(10rem, 25vw, 22rem);
+  height: clamp(10rem, 25vw, 22rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
-  filter: drop-shadow(0 24px 80px rgba(0, 0, 0, 0.45));
 }
 
 .hero-cube-glow {
