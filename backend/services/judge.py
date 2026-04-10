@@ -120,11 +120,16 @@ def _call_groq_api(passage: str, question: str, sentences: list[str]) -> str:
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
+            "Accept": "application/json",
+            "User-Agent": "hallucination-hunter/1.0",
         },
     )
     try:
         with request.urlopen(req, timeout=45) as res:
             response_data = res.read().decode("utf-8")
+    except error.HTTPError as exc:
+        details = exc.read().decode("utf-8", errors="replace")[:400]
+        raise RuntimeError(f"Groq API call failed: HTTP {exc.code} {details}") from exc
     except error.URLError as exc:
         raise RuntimeError("Groq API call failed.") from exc
 
