@@ -122,8 +122,8 @@ Track B owns the intelligence layer. This track is responsible for deciding what
 
 ### What This Person Should Build
 
-1. Anthropic judge integration
-   - connect to Anthropic API
+1. Groq judge integration
+   - connect to Groq API
    - use one batch call for suspicious sentences
    - pass passage, optional question, and sentence list
    - request strict JSON output only
@@ -164,7 +164,7 @@ Track B owns the intelligence layer. This track is responsible for deciding what
 
 ### Deliverables For Track B
 
-- working Anthropic batch judge integration
+- working Groq batch judge integration
 - stable JSON parsing and fallback logic
 - final aggregation rules
 - useful sentence explanations
@@ -256,7 +256,7 @@ These are the fields both tracks should align on before heavy implementation:
 
 ### Track B Checklist
 
-- [ ] Add Anthropic client integration
+- [ ] Add Groq client integration
 - [ ] Write system prompt and user payload format
 - [ ] Parse model JSON safely
 - [ ] Validate sentence-level verdicts
