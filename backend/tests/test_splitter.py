@@ -20,3 +20,16 @@ def test_split_sentences_filters_short_fragments(monkeypatch) -> None:
     result = splitter.split_sentences("Short. This sentence is definitely valid.")
 
     assert result == ["This sentence is definitely valid."]
+
+
+def test_split_sentences_handles_missing_space_after_punctuation(monkeypatch) -> None:
+    monkeypatch.setattr(splitter, "_punkt_tokenizer_available", lambda: False)
+
+    result = splitter.split_sentences(
+        "Launched by NASA, ESA, and CSA).It is often described as Hubble's successor."
+    )
+
+    assert result == [
+        "Launched by NASA, ESA, and CSA).",
+        "It is often described as Hubble's successor.",
+    ]

@@ -33,6 +33,19 @@ Each item must have:
 - explanation: one concise sentence
 - confidence: float 0.0 to 1.0
 - critical: true only when sentence has a core factual error
+
+Verdict rules:
+- faithful: sentence is supported by the passage and helps answer the question.
+- hallucinated: sentence contradicts the passage, or asserts specific facts not supported by the passage.
+- drifting: sentence may be plausible, but does not address the user question.
+- partial: sentence mixes supported and unsupported claims while still being on-topic.
+- unverifiable: sentence is too vague to verify from the passage alone.
+
+Priority:
+1) Contradiction -> hallucinated.
+2) If not contradiction but off-question -> drifting.
+3) If on-question with mixed support -> partial.
+4) Only mark faithful when both support and relevance are clear.
 """
 
 
