@@ -1,14 +1,11 @@
 import os
 from functools import lru_cache
-from typing import Literal
 
 from sentence_transformers import SentenceTransformer, util
 
 
-DEFAULT_SUSPICIOUS_THRESHOLD = 0.45
-DEFAULT_SAFE_THRESHOLD = 0.72
+DEFAULT_THRESHOLD = 0.92
 MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "all-MiniLM-L6-v2")
-SimilarityZone = Literal["suspicious", "gray", "safe"]
 
 
 def get_similarity(sentence: str, passage: str) -> float:
@@ -18,38 +15,12 @@ def get_similarity(sentence: str, passage: str) -> float:
     return _normalize_similarity(score)
 
 
-def get_similarity_thresholds() -> tuple[float, float]:
-    # Legacy compatibility: if only SIMILARITY_THRESHOLD is set, treat it as safe threshold.
-    legacy = _read_threshold("SIMILARITY_THRESHOLD", default=None)
-    suspicious = _read_threshold("SUSPICIOUS_THRESHOLD", default=None)
-    safe = _read_threshold("SAFE_THRESHOLD", default=None)
-
-    if safe is None and legacy is not None:
-        safe = legacy
-    if suspicious is None and legacy is not None:
-        suspicious = max(0.0, legacy - 0.1)
-
-    suspicious = DEFAULT_SUSPICIOUS_THRESHOLD if suspicious is None else suspicious
-    safe = DEFAULT_SAFE_THRESHOLD if safe is None else safe
-
-    if suspicious > safe:
-        suspicious, safe = safe, suspicious
-
-    return suspicious, safe
+def get_similarity_threshold() -> float:
+    return _read_threshold("SIMILARITY_THRESHOLD", default=DEFAULT_THRESHOLD)
 
 
 def is_suspicious(score: float) -> bool:
-    # In the 3-zone gate, both low-score and gray-zone sentences go to judge.
-    return classify_similarity(score) != "safe"
-
-
-def classify_similarity(score: float) -> SimilarityZone:
-    suspicious_threshold, safe_threshold = get_similarity_thresholds()
-    if score <= suspicious_threshold:
-        return "suspicious"
-    if score >= safe_threshold:
-        return "safe"
-    return "gray"
+    return score < get_similarity_threshold()
 
 
 @lru_cache(maxsize=1)
