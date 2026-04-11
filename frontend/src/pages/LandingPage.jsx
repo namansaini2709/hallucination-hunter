@@ -9,8 +9,9 @@ export function LandingPage() {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        style={{ filter: "contrast(1.05) brightness(1.1)" }}
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
+        style={{ filter: "contrast(1.1) brightness(1.1)" }}
+        src="/hunterlanding.mov"
       >
         <source src="/hunterlanding.mov" type="video/quicktime" />
       </video>
