@@ -7,7 +7,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="relative min-h-screen overflow-hidden text-stone-100">
-        <BackgroundScene />
         <div className="relative">
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -20,9 +19,9 @@ export default function App() {
   );
 }
 
-function BackgroundScene() {
+export function BackgroundScene() {
   return (
-    <div className="pointer-events-none absolute inset-0">
+    <div className="pointer-events-none fixed inset-0 z-0">
       <div className="ambient-orb ambient-orb-left" />
       <div className="ambient-orb ambient-orb-right" />
       <div className="grid-haze" />

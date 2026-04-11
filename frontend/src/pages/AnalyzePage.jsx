@@ -5,6 +5,7 @@ import { ExampleLoader } from "../components/ExampleLoader";
 import { InputPanel } from "../components/InputPanel";
 import { ResultsPanel } from "../components/ResultsPanel";
 import { useAnalysis } from "../hooks/useAnalysis";
+import { BackgroundScene } from "../App";
 
 const initialForm = {
   passage: "",
@@ -31,8 +32,9 @@ export function AnalyzePage() {
   };
 
   return (
-    <div className="px-4 py-6 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6">
+    <div className="relative px-4 py-6 sm:px-6 lg:px-8">
+      <BackgroundScene />
+      <div className="relative mx-auto flex max-w-7xl flex-col gap-6">
         <header className="panel-shell rounded-[1.5rem] px-5 py-4">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>

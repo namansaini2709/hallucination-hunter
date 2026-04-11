@@ -9,11 +9,10 @@ export function LandingPage() {
         muted
         loop
         playsInline
-        preload="auto"
-        className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
-        style={{ filter: "contrast(1.1) brightness(1.1)" }}
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{ filter: "contrast(1.05) brightness(1.1)" }}
       >
-        <source src="/wallpaper.mp4" type="video/mp4" />
+        <source src="/hunterlanding.mov" type="video/quicktime" />
       </video>
 
       {/* Get Started Button - Bottom Right */}
